@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scent Symphony · fine fragrance</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fefcf9;
+      color: #1e1e1e;
+      line-height: 1.5;
+    }
+
+    h1, h2, h3, .logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    :root {
+      --gold: #c9a26b;
+      --gold-light: #e6d5b8;
+      --charcoal: #2b2b2b;
+      --soft-ivory: #fefcf9;
+      --stone: #f3efe8;
+      --accent-dark: #3f3a36;
+      --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+    }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+    /* HEADER */
+    header {
+      background-color: var(--soft-ivory);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.02);
+      position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid rgba(201, 162, 107, 0.15);
+      backdrop-filter: blur(6px);
+    }
+    .navbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+    .logo { font-size: 2rem; font-weight: 600; color: var(--charcoal); letter-spacing: -0.01em; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .logo i { color: var(--gold); font-size: 1.8rem; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--charcoal); font-weight: 400; font-size: 1rem; transition: color 0.2s; letter-spacing: 0.02em; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; width: 0; height: 1.5px; bottom: -6px; left: 0; background-color: var(--gold); transition: width 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-icons { display: flex; gap: 1.8rem; font-size: 1.3rem; color: var(--charcoal); }
+    .nav-icons i { cursor: default; transition: color 0.2s; }
+    .nav-icons i:hover { color: var(--gold); }
+    .menu-toggle { display: none; }
+    .hamburger { display: none; font-size: 1.8rem; cursor: pointer; color: var(--charcoal); }
+
+    /* HERO */
+    .hero { padding: 48px 0 24px; background: linear-gradient(135deg, #f9f4ee 0%, #fefcf9 100%); }
+    .hero-grid { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .hero-content { flex: 1 1 300px; }
+    .hero-content .eyebrow { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); font-weight: 600; margin-bottom: 16px; }
+    .hero-content h1 { font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.2; color: var(--charcoal); font-weight: 600; margin-bottom: 24px; }
+    .hero-content p { font-size: 1.1rem; color: #5f5a54; max-width: 500px; margin-bottom: 32px; }
+
+    .hero-thumbs { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+    .hero-thumbs img {
+      width: 70px; height: 70px; object-fit: cover; border-radius: 50%;
+      border: 2px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.25s;
+    }
+    .hero-thumbs img:hover { transform: translateY(-4px) scale(1.05); }
+
+    .btn { display: inline-block; background-color: var(--charcoal); color: #fff; text-decoration: none; padding: 14px 34px; font-weight: 500; letter-spacing: 0.04em; border-radius: 40px; transition: all 0.25s; border: 1px solid var(--charcoal); font-size: 0.95rem; }
+    .btn:hover { background-color: var(--gold); border-color: var(--gold); color: var(--charcoal); }
+    .btn-outline { background: transparent; color: var(--charcoal); border: 1px solid var(--charcoal); margin-left: 16px; }
+    .btn-outline:hover { background: var(--charcoal); color: #fff; border-color: var(--charcoal); }
+
+    .hero-image { flex: 1 1 300px; border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%; overflow: hidden; box-shadow: var(--shadow-sm); background: #eae2d7; aspect-ratio: 1/1.1; display: flex; align-items: center; justify-content: center; }
+    .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+    .hero-image img:hover { transform: scale(1.03); }
+
+    /* SECTION TITLES */
+    .section-title { font-size: 2.2rem; font-weight: 500; color: var(--charcoal); margin-bottom: 12px; letter-spacing: -0.01em; }
+    .section-sub { color: var(--gold); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; }
+
+    /* CATEGORIES */
+    .categories { padding: 70px 0; background-color: var(--soft-ivory); }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 28px; margin-top: 48px; }
+    .cat-card { background: #fff; padding: 28px 16px 22px; border-radius: 24px; text-align: center; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.02); border: 1px solid rgba(201, 162, 107, 0.2); transition: all 0.25s; }
+    .cat-card:hover { transform: translateY(-6px); border-color: var(--gold); box-shadow: 0 20px 30px -12px rgba(201, 162, 107, 0.2); }
+    .cat-icon { font-size: 2.8rem; color: var(--gold); margin-bottom: 18px; }
+    .cat-card h3 { font-size: 1.35rem; font-weight: 500; margin-bottom: 6px; }
+    .cat-card p { color: #6f6a64; font-size: 0.9rem; }
+
+    /* PRODUCTS */
+    .products { padding: 70px 0; background-color: var(--stone); }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 36px; margin-top: 48px; }
+    .product-card { background: #fff; border-radius: 28px; overflow: hidden; box-shadow: var(--shadow-sm); transition: transform 0.25s, box-shadow 0.3s; border: 1px solid rgba(0, 0, 0, 0.02); }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.15); }
+    .product-img { height: 280px; background: #f0ebe4; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .product-card:hover .product-img img { transform: scale(1.03); }
+    .product-info { padding: 24px 22px 26px; text-align: left; }
+    .product-info .scent-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+    .product-info h3 { font-size: 1.5rem; font-weight: 500; margin-bottom: 6px; color: var(--charcoal); }
+    .product-info .desc { color: #6f6a64; font-size: 0.95rem; margin-bottom: 16px; }
+    .price { font-weight: 700; color: var(--charcoal); font-size: 1.2rem; letter-spacing: -0.01em; }
+    .price small { font-weight: 400; font-size: 0.85rem; color: #9a938c; margin-left: 4px; }
+
+    /* GALLERY / EDITORIAL SECTION */
+    .gallery { padding: 70px 0; background: var(--soft-ivory); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 48px; }
+    .gallery-item { border-radius: 22px; overflow: hidden; background: #eae2d7; position: relative; box-shadow: var(--shadow-sm); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item .caption {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 18px 20px; background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+      color: #fff; font-size: 0.9rem; letter-spacing: 0.04em;
+    }
+    .gallery-item .caption span { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--gold-light); margin-bottom: 4px; }
+
+    /* ABOUT + SERVICES */
+    .about-services { padding: 70px 0; background: var(--soft-ivory); }
+    .about-grid { display: flex; gap: 50px; flex-wrap: wrap; align-items: center; }
+    .about-text { flex: 2 1 350px; }
+    .about-text h2 { font-size: 2.2rem; margin-bottom: 20px; }
+    .about-text p { color: #5b5651; margin-bottom: 18px; font-size: 1.05rem; }
+    .services-list { list-style: none; margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; }
+    .services-list li { display: flex; align-items: center; gap: 14px; font-weight: 500; color: var(--charcoal); }
+    .services-list i { color: var(--gold); font-size: 1.3rem; width: 24px; text-align: center; }
+    .about-image { flex: 1 1 280px; border-radius: 32px; overflow: hidden; box-shadow: var(--shadow-sm); aspect-ratio: 1/0.9; background: #e2d9cf; }
+    .about-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* FOOTER */
+    footer { background-color: #1e1b18; color: #ddd7cf; padding: 56px 0 24px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 40px; margin-bottom: 48px; }
+    .footer-col h4 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 500; color: #fff; margin-bottom: 22px; letter-spacing: 0.02em; }
+    .footer-col p, .footer-col a { color: #b3aca4; text-decoration: none; font-size: 0.95rem; line-height: 2; transition: color 0.2s; display: block; }
+    .footer-col a:hover { color: var(--gold-light); }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.9rem; color: #fff; display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
+    .footer-logo i { color: var(--gold); }
+    .social-icons { display: flex; gap: 18px; margin-top: 12px; }
+    .social-icons i { font-size: 1.3rem; color: #b3aca4; transition: color 0.2s; cursor: default; }
+    .social-icons i:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid #352f2a; padding-top: 28px; text-align: center; color: #8f8881; font-size: 0.85rem; letter-spacing: 0.02em; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.wide { grid-column: span 2; }
+    }
+
+    @media (max-width: 800px) {
+      .navbar { flex-wrap: wrap; }
+      .hamburger { display: block; order: 1; }
+      .logo { order: 0; font-size: 1.7rem; }
+      .nav-icons { order: 2; gap: 1.2rem; font-size: 1.2rem; }
+      .nav-links { display: none; flex-direction: column; width: 100%; gap: 1.2rem; padding: 24px 0 16px; order: 3; border-top: 1px solid var(--gold-light); margin-top: 12px; }
+      .menu-toggle:checked ~ .nav-links { display: flex; }
+      .hero { padding: 32px 0 16px; }
+      .hero-grid { flex-direction: column-reverse; text-align: center; }
+      .hero-content p { margin-left: auto; margin-right: auto; }
+      .hero-thumbs { justify-content: center; }
+      .btn-outline { margin-left: 0; margin-top: 12px; }
+      .hero-image { max-width: 320px; margin: 0 auto; }
+      .btn { padding: 12px 28px; }
+      .section-title { font-size: 1.9rem; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-grid { grid-template-columns: 1fr; }
+      .about-grid { flex-direction: column; }
+      .services-list { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .cat-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .nav-icons { gap: 0.8rem; font-size: 1.1rem; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item.wide { grid-column: span 1; }
+      .gallery-item.tall { grid-row: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="navbar">
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger"><i class="fas fa-bars"></i></label>
+
+        <a href="#" class="logo">
+          <i class="fas fa-leaf"></i> ScentSymphony
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#categories">Scents</a></li>
+          <li><a href="#products">Perfumes</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+        </ul>
+
+        <div class="nav-icons">
+          <i class="fas fa-search"></i>
+          <i class="fas fa-user"></i>
+          <i class="fas fa-shopping-bag"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="eyebrow">New collection · 2025</div>
+          <h1>Where scent<br>becomes symphony</h1>
+          <p>Discover rare essences and artisanal blends — crafted for those who wear fragrance as a statement.</p>
+          <div>
+            <a href="#products" class="btn">Shop now</a>
+            <a href="#about" class="btn btn-outline">Our story</a>
+          </div>
+          <!-- extra perfume thumbnails -->
+          <div class="hero-thumbs">
+            <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=150&auto=format&fit=crop&q=80" alt="Perfume thumb">
+            <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=150&auto=format&fit=crop&q=80" alt="Perfume thumb">
+            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=150&auto=format&fit=crop&q=80" alt="Perfume thumb">
+            <img src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=150&auto=format&fit=crop&q=80" alt="Perfume thumb">
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&auto=format&fit=crop&q=80" alt="Luxury perfume bottle with flowers">
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section id="categories" class="categories">
+      <div class="container">
+        <div class="section-sub">The olfactive families</div>
+        <h2 class="section-title">Scent elements</h2>
+        <div class="cat-grid">
+          <div class="cat-card">
+            <div class="cat-icon"><i class="fas fa-leaf"></i></div>
+            <h3>Green & Fresh</h3>
+            <p>Bergamot, vetiver, crushed leaves</p>
+          </div>
+          <div class="cat-card">
+            <div class="cat-icon"><i class="fas fa-seedling"></i></div>
+            <h3>Floral</h3>
+            <p>Rose, jasmine, orange blossom</p>
+          </div>
+          <div class="cat-card">
+            <div class="cat-icon"><i class="fas fa-fire"></i></div>
+            <h3>Woody & Warm</h3>
+            <p>Cedar, sandalwood, amber</p>
+          </div>
+          <div class="cat-card">
+            <div class="cat-icon"><i class="fas fa-citrus"></i></div>
+            <h3>Citrus</h3>
+            <p>Lemon, neroli, mandarin</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS (8 perfumes) -->
+    <section id="products" class="products">
+      <div class="container">
+        <div class="section-sub">Signature blends</div>
+        <h2 class="section-title">Perfume collection</h2>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&auto=format&fit=crop&q=80" alt="Noir Ambré perfume">
+            </div>
+            <div class="product-info">
+              <div class="scent-tag">Amber · Vanilla · Sandalwood</div>
+              <h3>Noir Ambré</h3>
+              <p class="desc">Warm amber, madagascar vanilla, and creamy sandalwood — a sensual evening aura.</p>
+              <div class="price">₹8,900 <small>50ml</small></div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=600&auto=format&fit=crop&q=80" alt="Fleur Blanche perfume">
+            </div>
+            <div class="product-info">
+              <div class="scent-tag">Jasmine · Rose · White Musk</div>
+              <h3>Fleur Blanche</h3>
+              <p class="desc">A bouquet of fresh jasmine, damask rose, and soft white musk. Pure elegance.</p>
+              <div class="price">₹7,600 <small>50ml</small></div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&auto=format&fit=crop&q=80" alt="Citrus Riviera perfume">
+            </div>
+            <div class="product-info">
+              <div class="scent-tag">Bergamot · Neroli · Vetiver</div>
+              <h3>Citrus Riviera</h3>
+              <p class="desc">Sun-drenched citrus, neroli, and a whisper of vetiver. Fresh, bright, unforgettable.</p>
+              <div class="price">₹6,400 <small>50ml</small></div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=600&auto=format&fit=crop&q=80" alt="Oud Royal perfume">
+            </div>
+            <div class="product-info">
+              <div class="scent-tag">Oud · Saffron · Patchouli</div>
+              <h3>Oud Royal</h3>
+              <p class="desc">Resinous oud, saffron, and earthy patchouli — a majestic, long-lasting trail.</p>
+              <div class="price">₹12,800 <small>50ml</small></div>
+            </div>
+          </div>
+          <!-- NEW perfumes -->
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=600&auto=format&fit=crop&q=80" alt="Velvet Orchid perfume">
+            </div>
+            <div class="product-info">
+              <div class="scent-tag">Orchid · Black Currant · Vanilla</div>
+              <h3>Velvet Orchid</h3>
+              <p class="desc">Lush orchid, tangy black currant, and a vanilla base — opulent and playful.</p>
+              <div class="price">₹9,200 <small>50ml</small></div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1610461888750-10bfc601b874?w=600&auto=format&fit=crop&q=80" alt="Mystic Rose perfume">
+            </div>
+            <div class="product-info">
+              <div class="scent-tag">Damask Rose · Peony · Musk</div>
+              <h3>Mystic Rose</h3>
+              <p class="desc">A timeless rose soliflore, lifted by peony and grounded with soft musk.</p>
+              <div class="price">₹7,200 <small>50ml</small></div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1619994403073-2cec844b8e63?w=600&auto=format&fit=crop&q=80" alt="Aqua Marine perfume">
+            </div>
+            <div class="product-info">
+              <div class="scent-tag">Sea Salt · Sage · Cedar</div>
+              <h3>Aqua Marine</h3>
+              <p class="desc">Crisp sea salt, herbal sage, and dry cedar — a breath of coastal air.</p>
+              <div class="price">₹6,900 <small>50ml</small></div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=600&auto=format&fit=crop&q=80&sat=-20" alt="Golden Sandal perfume">
+            </div>
+            <div class="product-info">
+              <div class="scent-tag">Sandalwood · Tonka · Amber</div>
+              <h3>Golden Sandal</h3>
+              <p class="desc">Creamy sandalwood, sweet tonka bean, and golden amber. Warm and addictive.</p>
+              <div class="price">₹8,100 <small>50ml</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY / EDITORIAL (extra perfume pictures) -->
+    <section id="gallery" class="gallery">
+      <div class="container">
+        <div class="section-sub">The world of ScentSymphony</div>
+        <h2 class="section-title">Perfume gallery</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item tall">
+            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&auto=format&fit=crop&q=80" alt="Perfume bottle close-up">
+            <div class="caption"><span>Signature</span>Citrus Riviera</div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&auto=format&fit=crop&q=80" alt="Perfume bottle with flowers">
+            <div class="caption"><span>Best seller</span>Noir Ambré</div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=600&auto=format&fit=crop&q=80" alt="Perfume flacon on marble">
+            <div class="caption"><span>New</span>Velvet Orchid</div>
+          </div>
+          <div class="gallery-item wide">
+            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=1200&auto=format&fit=crop&q=80" alt="Perfume with floral setting">
+            <div class="caption"><span>Atelier</span>Crafted with rare naturals</div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1610461888750-10bfc601b874?w=600&auto=format&fit=crop&q=80" alt="Rose perfume bottle">
+            <div class="caption"><span>Floral</span>Mystic Rose</div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=600&auto=format&fit=crop&q=80" alt="Oud perfume bottle">
+            <div class="caption"><span>Oriental</span>Oud Royal</div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1595150358733-9a9b4c0393d1?w=600&auto=format&fit=crop&q=80" alt="Perfume ingredients">
+            <div class="caption"><span>Ingredients</span>Ethically sourced</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT + SERVICES -->
+    <section id="about" class="about-services">
+      <div class="container about-grid">
+        <div class="about-text">
+          <div class="section-sub">Behind the nose</div>
+          <h2>About ScentSymphony</h2>
+          <p>Founded in Grasse and now in Mumbai, we collaborate with independent perfumers to bring you small-batch, high-concentration fragrances. Every scent is a story — composed with rare naturals and modern molecules.</p>
+          <p>We believe fragrance is personal, sustainable, and deeply emotional. Our refillable bottles and ethically sourced ingredients reflect our commitment to beauty without compromise.</p>
+
+          <div id="services">
+            <div class="section-sub" style="margin-top: 12px;">What we offer</div>
+            <h2 style="font-size: 1.8rem; margin-bottom: 10px;">Our services</h2>
+            <ul class="services-list">
+              <li><i class="fas fa-flask"></i> Bespoke perfume creation</li>
+              <li><i class="fas fa-gift"></i> Gift wrapping & engraving</li>
+              <li><i class="fas fa-leaf"></i> Sustainable refill program</li>
+              <li><i class="fas fa-vial"></i> Discovery sets & samples</li>
+            </ul>
+          </div>
+        </div>
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1595150358733-9a9b4c0393d1?w=600&auto=format&fit=crop&q=80" alt="Perfume atelier and ingredients">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo"><i class="fas fa-leaf"></i> ScentSymphony</div>
+          <p style="margin-bottom: 12px;">Crafting scents that resonate with your story. Natural, ethical, extraordinary.</p>
+          <div class="social-icons">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-pinterest"></i>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-youtube"></i>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="#home">Home</a>
+          <a href="#categories">Scent elements</a>
+          <a href="#products">Perfumes</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#about">About us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="#">Contact</a>
+          <a href="#">Shipping</a>
+          <a href="#">Returns</a>
+          <a href="#">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <h4>Visit</h4>
+          <p>Linking Road, Bandra West<br>Mumbai, 400050</p>
+          <p style="margin-top: 12px;">Mon–Sat · 10am – 7pm</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 ScentSymphony. All rights reserved. | Designed with passion.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href === "#" || href === "") return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          const menuCheckbox = document.getElementById('menu-toggle');
+          if (menuCheckbox && menuCheckbox.checked) menuCheckbox.checked = false;
+        });
+      });
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          const menuCheckbox = document.getElementById('menu-toggle');
+          if (menuCheckbox) menuCheckbox.checked = false;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
